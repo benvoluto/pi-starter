@@ -1,0 +1,12 @@
+{
+  "$schema": "https://pi.dev/schemas/models.schema.json",
+  "providers": {
+    "reflection": {
+      "_requires": ["REFLECTION_API_KEY"],
+      "baseUrl": "https://api.reflection.ai/openai/v1",
+      "api": "openai-completions",
+      "apiKey": "${REFLECTION_API_KEY}",
+      "models": [{ "id": "Beam-1.0-501B-A23B" }]
+    }
+  }
+}

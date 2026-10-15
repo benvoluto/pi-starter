@@ -34,3 +34,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# pi-starter: org-specific values and local outputs
+org.env
+*.local.json
+.tmp-test/

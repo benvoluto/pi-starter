@@ -1,0 +1,16 @@
+{
+  "packages": [
+    {
+      "source": "npm:pi-ultracode",
+      "description": "Multi-agent workflows and subagents for pi"
+    },
+    {
+      "source": "npm:pi-ultracode-verify",
+      "description": "Repo-adaptive verification gate + ready-made workflows (feature, migrate, audit, bughunt, review)"
+    },
+    {
+      "source": "git:github.com/benvoluto/pi-vercel",
+      "description": "Vercel MCP server, safe `vercel` CLI tool, and slash commands"
+    }
+  ]
+}

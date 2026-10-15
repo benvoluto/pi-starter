@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "glean_default": {
+      "_requires": ["GLEAN_HOST"],
+      "type": "http",
+      "url": "https://{{GLEAN_HOST}}/mcp/default"
+    },
+    "asana": {
+      "_requires": ["ASANA_MCP_CLIENT_ID"],
+      "url": "https://mcp.asana.com/v2/mcp",
+      "exposure": "deferred",
+      "description": "Asana: tasks, projects, workspaces, goals.",
+      "oauth": {
+        "clientId": "{{ASANA_MCP_CLIENT_ID}}",
+        "clientSecret": "${ASANA_MCP_CLIENT_SECRET}",
+        "callbackUrl": "http://localhost:8080/callback"
+      }
+    },
+    "slack": {
+      "_requires": ["SLACK_MCP_CLIENT_ID", "SLACK_MCP_CALLBACK_URL"],
+      "url": "https://mcp.slack.com/mcp",
+      "exposure": "deferred",
+      "description": "Slack: search, channels, history, users, post messages.",
+      "oauth": {
+        "clientId": "{{SLACK_MCP_CLIENT_ID}}",
+        "callbackUrl": "{{SLACK_MCP_CALLBACK_URL}}",
+        "scope": "search:read.public channels:read channels:history search:read.users users:read chat:write"
+      }
+    }
+  }
+}
