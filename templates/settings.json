@@ -1,6 +1,6 @@
 {
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-5-5",
+  "defaultProvider": "vertex-anthropic",
+  "defaultModel": "claude-opus-5",
   "hideThinkingBlock": true,
   "externalEditor": "code --wait"
 }

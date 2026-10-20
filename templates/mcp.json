@@ -26,6 +26,11 @@
         "callbackUrl": "{{SLACK_MCP_CALLBACK_URL}}",
         "scope": "search:read.public channels:read channels:history search:read.users users:read chat:write"
       }
+    },
+    "omni": {
+      "url": "https://callbacks.omniapp.co/callback/mcp",
+      "exposure": "deferred",
+      "description": "Omni: BI/analytics — query models, topics, and dashboards."
     }
   }
 }

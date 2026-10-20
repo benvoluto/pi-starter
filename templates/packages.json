@@ -11,6 +11,10 @@
     {
       "source": "git:github.com/benvoluto/pi-vercel",
       "description": "Vercel MCP server, safe `vercel` CLI tool, and slash commands"
+    },
+    {
+      "source": "file:extensions/pi-vertex-claude",
+      "description": "Claude on Vertex AI provider for pi 1.x (uses pi's built-in Anthropic implementation)"
     }
   ]
 }

@@ -4,13 +4,13 @@
 //
 //   node install.mjs                 # everything
 //   node install.mjs --dry-run       # show what would change
-//   node install.mjs --only mcp,settings
+//   node install.mjs --only mcp,settings,extensions
 //   node install.mjs --skip-packages
 //
 // Respects PI_CODING_AGENT_DIR (default ~/.pi/agent).
 
 import { spawnSync } from "node:child_process";
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -35,6 +35,7 @@ if (!dryRun) mkdirSync(agentDir, { recursive: true });
 if (want("settings")) mergeTopLevel("settings.json");
 if (want("models")) mergeEntries("models.json", "providers");
 if (want("mcp")) mergeEntries("mcp.json", "mcpServers");
+if (want("extensions")) copyExtensions();
 if (want("packages") && !skipPackages) installPackages();
 
 log("\nDone. Next: export runtime secrets (see README), then run `pi` and `/mcp` to sign in.");
@@ -81,6 +82,27 @@ function mergeEntries(file, key) {
   }
   report(file, added, skipped);
   if (added.length) write(target, cur);
+}
+
+function copyExtensions() {
+  const srcDir = join(root, "extensions");
+  const dstDir = join(agentDir, "extensions");
+  if (!existsSync(srcDir)) {
+    log("extensions\n  = none to copy");
+    return;
+  }
+  log("extensions");
+  if (!dryRun) mkdirSync(dstDir, { recursive: true });
+  for (const entry of readdirSync(srcDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const dst = join(dstDir, entry.name);
+    if (existsSync(dst)) {
+      log(`  = ${entry.name} (already exists)`);
+      continue;
+    }
+    log(`  + ${entry.name}`);
+    if (!dryRun) cpSync(join(srcDir, entry.name), dst, { recursive: true });
+  }
 }
 
 function installPackages() {
